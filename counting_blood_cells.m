@@ -3,6 +3,7 @@ A = im2double(imread('C:\Users\pr1266\Desktop\Cells.tif'));
 t = graythresh(A);
 %% inja ba otsu threshold image ro siah-sefid mikonim (0 ya 1)
 A = im2bw(A, 0.15);
+A = A(2:size(A, 1),:);
 
 %% ye tensor be andaze size tasvir ijad mikonim
 %% ta algorithm DFS ro roosh ejra konim
@@ -58,6 +59,7 @@ for row = 1 : rows
                 %// Step 3b
                 %// Pop off the stack
                 loc = stack(1,:);
+                disp('loc');
                 disp(loc);
                 stack(1,:) = [];
 
@@ -109,7 +111,7 @@ for row = 1 : rows
                 %// Add remaining locations to the stack
                 stack = [stack; [locs_x locs_y]];
             end
-            break;
+            %break;
 
             %// Step 4
             %// Increment counter once complete region has been examined
