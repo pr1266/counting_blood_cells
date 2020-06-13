@@ -17,7 +17,7 @@ visited = false(size(A));
 %% 
 B = zeros(rows,cols);
 %% yek counter baraye shomaresh e connected component ha:
-ID_counter = 0;
+ID_counter = 1;
 
 %// Step 2
 %// For each location in your matrix...
@@ -110,6 +110,10 @@ for row = 1 : rows
                  %locs_x = [loc(1); loc(1); loc(1)-1; loc(1)+1];
 
                 %// Get rid of those locations out of bounds
+                %% hala check mikonim ke az location haii ke dar bala gofte shod,
+                %% mahal e invalid nadashte bashim baraye mesal,
+                %% dar noghat e gooshe bala chap e tasvir (x - 1, y - 1)
+                %% tarif nashode va invalid hast
                 out_of_bounds = locs_x < 1 | locs_x > rows | locs_y < 1 | locs_y > cols;
 
                 locs_y(out_of_bounds) = [];
@@ -117,31 +121,48 @@ for row = 1 : rows
 
                 %// Step 3f
                 %// Get rid of those locations already visited
+
+                %%%%%%%%%%%%%% ================== %%%%%%%%%%%%%%%%
+                
+                %% dar in ghesmat, az mian e hamsaye ha, pixel haii ke ghablan
+                %% vist karde bashim ra hazf mikonim va dobare check nmikonim
                 is_visited = visited(sub2ind([rows cols], locs_x, locs_y));
 
                 locs_y(is_visited) = [];
                 locs_x(is_visited) = [];
-
+                
+                %%%%%%%%%%%%%%%% =============== %%%%%%%%%%%%%%%%%%%%
+                
+                
                 %// Get rid of those locations that are zero.
+                %% inja pixel haii ke 0 hastand, hazf mikonim :
                 is_1 = A(sub2ind([rows cols], locs_x, locs_y));
                 locs_y(~is_1) = [];
                 locs_x(~is_1) = [];
 
                 %// Step 3g
                 %// Add remaining locations to the stack
+                %% hala, ke hamsaye haro standard kardim, 
+                %% yani invalid, zero, ya visited nistand,
+                %% hamsaye haye baghi mande ra dar stack ezafe mikonim
                 stack = [stack; [locs_x locs_y]];
             end
             %break;
 
             %// Step 4
             %// Increment counter once complete region has been examined
+            %% dar entehaye loop e bala,
+            %% yek connected-component be tor e kamel,
+            %% peymayesh mishavad va label zade mishavad
+            %% bana bar in ID_counter ro yeki ezafe mikonim
             ID_counter = ID_counter + 1;
         end
     end %// Step 5
 end
 disp('tedad e cell ha : ');
-disp(ID_counter);
+disp(ID_counter - 1);
 [x, n] = bwlabel(A);
-
+disp('natije dastor e BWLABEL default e matlab : ');
+disp(n);
 imshow(B);
 imwrite(A,'segmented_cells.tif');
