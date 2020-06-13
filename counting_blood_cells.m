@@ -1,4 +1,4 @@
-A = im2double(imread('C:\Users\pr1266\Desktop\Cells.tif'));
+A = im2double(imread('Cells.tif'));
 %% inja threshold otsu peyda mikonim :
 t = graythresh(A);
 %% inja ba otsu threshold image ro siah-sefid mikonim (0 ya 1)
@@ -122,4 +122,6 @@ end
 disp('tedad e cell ha : ');
 disp(ID_counter);
 [x, n] = bwlabel(A);
+
 imshow(x);
+imwrite(A,'segmented_cells.tif');
