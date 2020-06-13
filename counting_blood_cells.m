@@ -2,7 +2,7 @@ A = im2double(imread('Cells.tif'));
 %% inja threshold otsu peyda mikonim :
 t = graythresh(A);
 %% inja ba otsu threshold image ro siah-sefid mikonim (0 ya 1)
-A = im2bw(A, 0.15);
+A = im2bw(A, 0.18);
 A = A(2:size(A, 1),:);
 
 %% ye tensor be andaze size tasvir ijad mikonim
@@ -117,10 +117,27 @@ for row = 1 : rows
         end
     end
 end
+
+ID_counter = ID_counter - 1;
+
 disp('tedad e cell ha : ');
-disp(ID_counter - 1);
+disp(ID_counter);
 [x, n] = bwlabel(A);
 disp('natije dastor e BWLABEL default e matlab : ');
 disp(n);
 imshow(B);
 imwrite(A,'segmented_cells.tif');
+
+%% inja tedad e pixel haye har label ro mishomarim
+%% ke barabar ba masahat e har cell hast
+%% baraye in kar yek array ba size 2 * ID_counter
+%% dar nazar migirim
+count_ = zeros(2, ID_counter - 1);
+
+for i = 1: ID_counter
+    count_(1, i) = i;
+    count_(2, i) = sum(B(:) == i);
+end
+
+%% inja miaim to file excel savesh mikonim :
+xlswrite('test.xlsx', count_);
