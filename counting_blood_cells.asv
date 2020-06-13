@@ -47,18 +47,16 @@ for row = 1 : rows
             %// Step 3
             %// Initialize your stack with this location
             %% vaghti ke sath e roshanaii mored e nazar 1 hast va
-            %% visit ham nashode, ye stack dorost mikonim va mokhtasat e 
-            %% pixel e feli ro toosh zakhire mikonim
+            %% visit ham nashode, ye stack dorost mikonim va maghdir e 
+            %% 
             stack = [row col];
-            disp('current row and col : ');
-            disp(stack);
+            disp(size(stack));
             %// Step 3a
             %// While your stack isn't empty...
             while ~isempty(stack)
                 %// Step 3b
                 %// Pop off the stack
                 loc = stack(1,:);
-                disp(loc);
                 stack(1,:) = [];
 
                 %// Step 3c
@@ -109,7 +107,6 @@ for row = 1 : rows
                 %// Add remaining locations to the stack
                 stack = [stack; [locs_x locs_y]];
             end
-            break;
 
             %// Step 4
             %// Increment counter once complete region has been examined
