@@ -1,4 +1,4 @@
-A = im2double(imread('C:\Users\pr1266\Desktop\Cells.tif'));
+A = im2double(imread('Cells.tif'));
 %% inja threshold otsu peyda mikonim :
 t = graythresh(A);
 %% inja ba otsu threshold image ro siah-sefid mikonim (0 ya 1)
@@ -51,19 +51,28 @@ for row = 1 : rows
             %% visit ham nashode, ye stack dorost mikonim va mokhtasat e 
             %% pixel e feli ro toosh zakhire mikonim
             stack = [row col];
-            %disp('current row and col : ');
-            %disp(stack);
+            disp('current row and col : ');
+            disp(stack);
             %// Step 3a
             %// While your stack isn't empty...
+            %% inja DFS ro anjam midim :
             while ~isempty(stack)
                 %// Step 3b
                 %// Pop off the stack
+                %% az top e stack barmidarim va zakhire mikonim :
+                %% inja zakhire mikonim
                 loc = stack(1,:);
-                %disp(loc);
+                disp('loc');
+                disp(loc);
+                %% inja az top e stack pop mikonim
                 stack(1,:) = [];
 
                 %// Step 3c
                 %// If we have visited this location, continue
+                %% age row va col ke az top stack pop kardim
+                %% ghablan visit shode bashe, kari bahash nadarim
+                %% va mirim soragh e element haye baadi stack
+                %% agar stack khali bood tamoom mikonim algorithm 
                 if visited(loc(1),loc(2))
                     continue;
                 end
@@ -121,4 +130,6 @@ end
 disp('tedad e cell ha : ');
 disp(ID_counter);
 [x, n] = bwlabel(A);
+
 imshow(x);
+imwrite(A,'segmented_cells.tif');

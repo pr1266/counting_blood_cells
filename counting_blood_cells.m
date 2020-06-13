@@ -55,16 +55,24 @@ for row = 1 : rows
             disp(stack);
             %// Step 3a
             %// While your stack isn't empty...
+            %% inja DFS ro anjam midim :
             while ~isempty(stack)
                 %// Step 3b
                 %// Pop off the stack
+                %% az top e stack barmidarim va zakhire mikonim :
+                %% inja zakhire mikonim
                 loc = stack(1,:);
                 disp('loc');
                 disp(loc);
+                %% inja az top e stack pop mikonim
                 stack(1,:) = [];
 
                 %// Step 3c
                 %// If we have visited this location, continue
+                %% age row va col ke az top stack pop kardim
+                %% ghablan visit shode bashe, kari bahash nadarim
+                %% va mirim soragh e element haye baadi stack
+                %% agar stack khali bood tamoom mikonim algorithm ro
                 if visited(loc(1),loc(2))
                     continue;
                 end
@@ -72,6 +80,7 @@ for row = 1 : rows
                 %// Step 3d
                 %// Mark location as true and mark this location to be
                 %// its unique ID
+                %% dar gheire insoorat:
                 visited(loc(1),loc(2)) = true;
                 B(loc(1),loc(2)) = ID_counter;
 
@@ -111,7 +120,7 @@ for row = 1 : rows
                 %// Add remaining locations to the stack
                 stack = [stack; [locs_x locs_y]];
             end
-            %break;
+            break;
 
             %// Step 4
             %// Increment counter once complete region has been examined
@@ -123,5 +132,5 @@ disp('tedad e cell ha : ');
 disp(ID_counter);
 [x, n] = bwlabel(A);
 
-imshow(x);
+imshow(B);
 imwrite(A,'segmented_cells.tif');
