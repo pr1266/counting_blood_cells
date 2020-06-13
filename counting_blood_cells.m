@@ -81,13 +81,24 @@ for row = 1 : rows
                 %// Mark location as true and mark this location to be
                 %// its unique ID
                 %% dar gheire insoorat:
+                %% visited e motanazer ba pixel e mored e nazar
+                %% ro True mikonim, va be jaye meghdar e 1 ke
+                %% sath roshanaii pixel e image e binary moon boode ro
+                %% bar midarim be jash addad e current label ro mizanim
+                %% baraye mesal agar pixel marboot be connected component e
+                %% shomare Nth bashe, N ro be jaye sath e roshanaiish dar nazar migirim
                 visited(loc(1),loc(2)) = true;
                 B(loc(1),loc(2)) = ID_counter;
-
+                    
                 %// Step 3e
                 %// Look at the 8 neighbouring locations
                 
-                
+                %% dar marhale baadi, 8 hamsaye kenari ro barresi mikonim:
+                %% yani pixel haye:
+                %% (x - 1, y - 1) , (x, y - 1) , (x + 1, y + 1)
+                %% (x, y - 1) , (x, y + 1),
+                %% (x - 1, y + 1), (x, y + 1), (x + 1, y + 1)
+                %% ro check mikonim
                 [locs_y, locs_x] = meshgrid(loc(2)-1:loc(2)+1, loc(1)-1:loc(1)+1);
                 locs_y = locs_y(:);
                 locs_x = locs_x(:);
@@ -120,7 +131,7 @@ for row = 1 : rows
                 %// Add remaining locations to the stack
                 stack = [stack; [locs_x locs_y]];
             end
-            break;
+            %break;
 
             %// Step 4
             %// Increment counter once complete region has been examined
