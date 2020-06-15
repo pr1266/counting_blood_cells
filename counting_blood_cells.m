@@ -1,9 +1,15 @@
+%% image ro mikhoonim :
 A = im2double(imread('Cells.tif'));
 %% inja threshold otsu peyda mikonim :
-t = graythresh(A);
+%t = graythresh(A);
 %% inja ba otsu threshold image ro siah-sefid mikonim (0 ya 1)
-A = im2bw(A, 0.18);
+A = imbinarize(A, 0.18);
 A = A(2:size(A, 1),:);
+
+%% erosion :
+%% inja erosion anjam midim ke functionesh ro
+%% nevestam erosion.m
+A = erosion(A);
 
 %% ye tensor be andaze size tasvir ijad mikonim
 %% ta algorithm DFS ro roosh ejra konim
@@ -39,8 +45,8 @@ for row = 1 : rows
             %% visit ham nashode, ye stack dorost mikonim va mokhtasat e 
             %% pixel e feli ro toosh zakhire mikonim
             stack = [row col];
-            disp('current row and col : ');
-            disp(stack);
+            %disp('current row and col : ');
+            %disp(stack);
 
             %% inja DFS ro anjam midim :
             while ~isempty(stack)
@@ -48,8 +54,8 @@ for row = 1 : rows
                 %% az top e stack barmidarim va zakhire mikonim :
                 %% inja zakhire mikonim
                 loc = stack(1,:);
-                disp('loc');
-                disp(loc);
+                %disp('loc');
+                %disp(loc);
                 %% inja az top e stack pop mikonim
                 stack(1,:) = [];
 
